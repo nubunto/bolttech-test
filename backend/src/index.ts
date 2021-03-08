@@ -7,6 +7,11 @@ import { installRoutes } from "./router";
 import { services } from "./services";
 import { Config } from "./config";
 
+const logger = winston.createLogger({
+  level: config.get("level") || "debug",
+  transports: [new winston.transports.Console()],
+  format: winston.format.simple(),
+});
 const app = express();
 app.use(express.json());
 app.use(
@@ -29,4 +34,6 @@ app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-app.listen(config.get("port"));
+app.listen(config.get("port"), () => {
+  logger.info(`Running application on port ${config.get("port")}`);
+});

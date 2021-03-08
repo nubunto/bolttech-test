@@ -99,6 +99,7 @@ export const installRoutes = (services: Services, config: Config): Router => {
         req.user.id
       );
       return res.status(200).json({
+        ok: true,
         projects,
       });
     })
@@ -204,7 +205,7 @@ export const installRoutes = (services: Services, config: Config): Router => {
         createTaskRequest
       );
       return res.json({
-          ok: true
+        ok: true,
       });
     })
   );
